@@ -1,0 +1,4 @@
+build
+dist
+django_site_permissions.egg-info
+*.pyc

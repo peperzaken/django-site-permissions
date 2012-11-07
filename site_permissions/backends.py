@@ -52,6 +52,7 @@ class RestrictSiteMixin(object):
         Filter queryset with objects that belongs to user sites.
         """
         qs = super(RestrictSiteMixin, self).queryset(request)
-        qs = qs.filter(id__in=SitePermissionBackend().user_sites(request.user).values_list('id', flat=True))
+        if not qs.model is Site:
+            qs = qs.filter(site__in=SitePermissionBackend().user_sites(request.user))
         return qs
 
